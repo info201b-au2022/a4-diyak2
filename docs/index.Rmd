@@ -1,45 +1,30 @@
 ---
-title: "Your A4 Report Title (TODO: Revise title)"
-author: "Your Name"
-date: '2022-11-01'
+title: "Inequality in the US Prison System"
+author: "Diya Kumaran"
+date: '2022-11-21'
 output: html_document
 ---
-
 ```{r echo=FALSE, eval=TRUE, message=FALSE}
 source("../source/a4-helpers.R")
 source("../source/analysis.R")
 ```
+## **Abstract**
+The US has one of the ***highest incarceration rates compared to other countries globally, making the US have the largest prison population in the world.*** Incarceration in the United States is the main form of punishment for crime; however, the prison system has several problems and needs to be reformed. From disproportionately impacting minorities, racial bias, economic inequality, and inhumane living conditions, there are several aspects of the system that impact multiple populations differently.
 
-## Abstract 
-[TODO: Include a short abstract (about 50 words)]
+## **Introduction**
+Within the prison system in the US, there lies several inequalities currently that are based off of historically oppressive systems and laws. Policing and the prison system has been created upon a racist and bias perspective. **Throughout the nation, people of color are far more likely to be seen in the nation’s justice system compared to the general population**. This disparity is harmful to people of color and other minorities as they are at a higher risk of being incarcerated and serving a longer or harsher sentence if they end up in the prison system. The incarceration system continues to dehumanize prisoners, while failing to ensure stability for prisoners once released. From 1970 to the present, the prison population and demographics have vastly changed, grown and shifted and it is important we study and understand these changes in order to address and create potential solutions to the inequalities that exists within our society.
 
-# Test (TODO: Remove before submission!!)
-```{r echo=FALSE}
-q1_string <- test_query1()
-num <- 5
-```
-As you know, this is a markdown report. The [R Markdown Cheatsheet](https://www.rstudio.com/wp-content/uploads/2015/02/rmarkdown-cheatsheet.pdf) is **useful!**
+## **Data Summary**
 
-* Here's a test of a dynamic variable. Say **"`r q1_string`!!!** 
-* Here's another test. A vector
-of numbers: `r test_query2(num)`.
+### Section 3
+When was the most significant increase in the prison population?
+In this section, looking at the growth of the total U.S. prison population from 1970 to 2018, which is important as we can see the trend in all populations over time to understand the rate of crime and criminal activity present in our society currently. The question we are trying to answer is _“What is the trend of the US prison population from 1970 to more recently?”_ Looking at this trend we are able to see how the prison system as a whole has changed, and we can base further research and questions off of this trend to examine different populations and areas.
 
-Recall that _{r echo=TRUE}_ can be used to display the code, 
-which is very useful when developing and debugging a report. Here's an example: 
+### Section 4
+Similar to the previous section, we are looking at the growth of the U.S. prison population from 1970 to 2018 by one or more states. This is important as this provides a narrower lens on the growth of the prison population, and we are able to see individual states in the US and how these states prison population has changed. The question that we are answering is _“What is the trend in WA, CA, and OR from years 1970 to 2018?”_ From looking at these three states, we can overall take a trend of a specific and study why it appears to be that way, or what laws and policies have made the trend differ from another state, such as the difference in WA and CA that overall have different populations and demographics.
 
-```{r echo=TRUE}
-num <- 5
-sum <- sum(test_query2(num))
-print(sum)
-```
+## Section 5
+Beyond overall trends and states, it is important to examine the different populations that exists within the prison system, as we know that people of colour are incarcerated at a higher rate compared to the white population. The question we are looking to answer is _“How does the trend in the White prison population, compare to the Black prison population from 1970-2018?”_ This question is important to understand and provides a foundation to ask other questions and examine factors that could influence the trends. From the chart, we can observe that the white population count is significantly higher than the Black population count. It is important to note that overall, there is a higher white population in America than the Black population, so we are looking at this data knowing that each prison population is respective to the general population of that group in America. This data is not specific about the crimes that each population has committed, and it is easy to say that the white population in jail is much higher. However, if we take the number of crimes from the white population, compared to the overall white population, that is much lower compared to the rate that Black people have been incarcerated. This is because the Black population in the prison system compared to their population overall in America is much higher, thus, proving that the prison system is disproportionately impacting the US’ Black population.
 
-## Introduction 
-[TODO]
-
-## Data Summary 
-[TODO]
-
-[TODO ... other sections ... See Canvas for details]
-
-_All the very best with your work!_
-
+## Section 6
+Lastly, this section examines the total prison population from 1970-2018 in two different regions in the US, as we are trying to see the trends in each of those regions and how they compare to each other. The question being answered is _“How is the prison population from years 1970-2018 distributed in the US?”_ Knowing that different regions in the US tend to have similar political views, governmental policies, and state policies, it is important to see the trend in different regions is important as we are able to see the regions that have had seen a growth in their prison population, and regions that have seen a plateau or decrease, and further study what factors and other aspects of our society are influencing that. For example, we can see that CA and TX have a high jail population compared to other states, and we know that these states are more densely populated and have a higher general population in the US. Seeing a specific region, allows us to examine a national issue at a narrower level, making it easier to understand the multiple complexities that make up the national prison system.
