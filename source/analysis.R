@@ -171,12 +171,11 @@ jail_pop_chart <- ggplot(jail_population, aes(year)) +
 print(jail_pop_chart)
 
 ## Section 6
+#Map of the Total Jail Population in the US by State
+# This function is intended to get the states across the US and 
+# show the total jail population from 1970-2018
 
-#Total Jail Population by Region 
-
-# This function is intended to get the states that belong to a specific region,
-
-# This function gets the jail population by different regions 
+# This function gets the jail population by every state 
 us_states_jail_pop <- function(region) {
   t <- incarceration_df %>%
     group_by(state) %>%
@@ -185,43 +184,21 @@ us_states_jail_pop <- function(region) {
   return(t)  
 }
 
-# region_year_jail_pop <- function(region) {
-#   states_by_region <- states_in_region (region)
-#   region_data <- incarceration_df[incarceration_df$state %in% states_by_region,]
-#   t <- region_data %>%
-#     group_by(state) %>%
-#     summarise(p = sum(total_jail_pop, na.rm = TRUE)) %>%
-#     select(state, p) 
-#   return(t)  
-# }
-#west_region_df <- region_year_jail_pop ("West")
-#colnames(west_region_df) <- c('year','West')
-#midwest_region_df <- region_year_jail_pop("Midwest")
-#colnames(midwest_region_df) <- c('year','Midwest')
-
-# Merges the two df into one to display it easier 
-#diff_regions_populations <- rbind(west_region_df , midwest_region_df)
-
 diff_regions_populations <- us_states_jail_pop()
 
 View(diff_regions_populations)
 
-# Map shows the the comparison of the jail population in the Midwest vs. the West 
+# Map shows the the comparison of the jail population throughout every state 
 dev.off()
-#region_map <- ggplot(diff_regions_populations, aes(year)) + 
-  #geom_sf(aes(fill = Population)) +
-  #ggtitle(label = "Jail Population Midwest vs. West")
-  #labs(caption = "This chart shows the trend in the jail population over the years in the Midwest and the West of the US") 
 
-#install.packages("sf")
 library(sf)
 library(leaflet)
 library(scales)
 library(ggmap)
 library(usmap)
 
-
-us_map <- plot_usmap(data = diff_regions_populations, values = "Population", , labels = TRUE, label_color = "white")
+# Makes the map showing the distribution across states 
+us_map <- plot_usmap(data = diff_regions_populations, values = "Population", labels = TRUE, label_color = "white")
 
 us_map <- us_map +
           ggtitle(label = "Jail Population Midwest vs. West") +
@@ -230,7 +207,6 @@ us_map <- us_map +
                         name = "Population",label = scales::comma,
                         limits = c(0,3000000)) +
           theme(legend.position = "right")
-
 
 print(us_map)
 
