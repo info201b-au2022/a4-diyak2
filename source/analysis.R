@@ -1,5 +1,12 @@
 library(tidyverse)
 library(dplyr)
+library(sf)
+library(leaflet)
+library(scales)
+library(ggmap)
+library(usmap)
+library(ggplot2)
+
 
 # The functions might be useful for A4
 source("~/info201/assignments/a4-diyak2/source/a4-helpers.R")
@@ -72,7 +79,6 @@ print(state_bottom_5_black_pop)
 
 # This function returns the bar chart that plots the increase in the total jail population 
  # in the US over the years 1970-2018
-library(ggplot2)
 
 plot_jail_pop_for_us <- function()  {
   jail_pop_for_us <- get_year_jail_pop()
@@ -105,7 +111,7 @@ get_jail_pop_by_states <- function (states) {
 
 # This plots three lines that show the growth in jail population for each of the 
 # the three states given and shows that over the time frame from 1970-2018 for each
-library(ggplot2)
+
 plot_jail_pop_by_states  <- function (states) {
   jail_pop_for_states <- get_jail_pop_by_states(states)
   state_line_chart <- jail_pop_for_states %>%
@@ -117,6 +123,7 @@ plot_jail_pop_by_states  <- function (states) {
   dev.off()
   print(state_line_chart)
 }
+
 plot_jail_pop_by_states(c("WA", "OR", "CA"))
 
 ## Section 5
@@ -138,9 +145,6 @@ get_white_jail_pop <- function() {
   return(t)  
 }
 
-white_jail_pop <- get_white_jail_pop()
-colnames(white_jail_pop) <- c('year','White_Pop')  
-
 get_black_jail_pop <- function() {
   t <- incarceration_df %>%
     group_by(year) %>%
@@ -149,26 +153,35 @@ get_black_jail_pop <- function() {
   return(t)  
 }
 
-black_jail_pop <- get_black_jail_pop()
-colnames(black_jail_pop) <- c('year','Black_Pop')  
+plot_jail_pop_by_race <- function() {
 
-# This is too see this data in one dataframe in order to plot it 
-jail_population <- merge(x = white_jail_pop, y = black_jail_pop, by = "year")
-#view(jail_population)
+  white_jail_pop <- get_white_jail_pop()
+  colnames(white_jail_pop) <- c('year','White_Pop')  
+  
+  black_jail_pop <- get_black_jail_pop()
+  colnames(black_jail_pop) <- c('year','Black_Pop')  
+  
+  # This is too see this data in one dataframe in order to plot it 
+  jail_population <- merge(x = white_jail_pop, y = black_jail_pop, by = "year")
+  #view(jail_population)
+  
+  #Shows the trend in the white population from 1970-2018 in jail compared 
+  # to the Black population in jail from 1970-2018
+  
+  dev.off()
+  jail_pop_chart <- ggplot(jail_population, aes(year)) + 
+    ggtitle("Jail Population Title") +
+    geom_line(aes(y = White_Pop, colour = "White_Pop")) + 
+    geom_line(aes(y = Black_Pop, colour = "Black_Pop")) + 
+    scale_y_continuous(name="Population Count", labels = scales::comma) +
+    labs(caption = "This chart shows the trend in ...") +
+    guides(color = guide_legend(title = "Populations"))
+  
+  print(jail_pop_chart)
 
-#Shows the trend in the white population from 1970-2018 in jail compared 
-# to the Black population in jail from 1970-2018
+}
 
-dev.off()
-jail_pop_chart <- ggplot(jail_population, aes(year)) + 
-  ggtitle("Jail Population Title") +
-  geom_line(aes(y = White_Pop, colour = "White_Pop")) + 
-  geom_line(aes(y = Black_Pop, colour = "Black_Pop")) + 
-  scale_y_continuous(name="Population Count", labels = scales::comma) +
-  labs(caption = "This chart shows the trend in ...") +
-  guides(color = guide_legend(title = "Populations"))
-
-print(jail_pop_chart)
+plot_jail_pop_by_race()
 
 ## Section 6
 #Map of the Total Jail Population in the US by State
@@ -184,29 +197,28 @@ us_states_jail_pop <- function(region) {
   return(t)  
 }
 
-diff_regions_populations <- us_states_jail_pop()
+plot_usmap_jail_population <- function() {
 
-View(diff_regions_populations)
+  diff_regions_populations <- us_states_jail_pop()
+  
+  #view(diff_regions_populations)
+  
+  # Map shows the the comparison of the jail population throughout every state 
+  dev.off()
+  
+  # Makes the map showing the distribution across states 
+  us_map <- plot_usmap(data = diff_regions_populations, values = "Population", labels = TRUE, label_color = "white", linewidth = 2)
+  
+  us_map <- us_map +
+    ggtitle(label = "Jail Population Midwest vs. West") +
+    labs(caption = "This chart shows the trend in the jail population over the years in the Midwest and the West of the US") +
+    scale_fill_continuous(low = "white", high ="darkblue", 
+                          name = "Population",label = scales::comma,
+                          limits = c(0,3000000)) +
+    theme(legend.position = "right")
+  
+  print(us_map)
 
-# Map shows the the comparison of the jail population throughout every state 
-dev.off()
+}
 
-library(sf)
-library(leaflet)
-library(scales)
-library(ggmap)
-library(usmap)
-
-# Makes the map showing the distribution across states 
-us_map <- plot_usmap(data = diff_regions_populations, values = "Population", labels = TRUE, label_color = "white")
-
-us_map <- us_map +
-          ggtitle(label = "Jail Population Midwest vs. West") +
-          labs(caption = "This chart shows the trend in the jail population over the years in the Midwest and the West of the US") +
-          scale_fill_continuous(low = "white", high ="darkblue", 
-                        name = "Population",label = scales::comma,
-                        limits = c(0,3000000)) +
-          theme(legend.position = "right")
-
-print(us_map)
-
+plot_usmap_jail_population()
