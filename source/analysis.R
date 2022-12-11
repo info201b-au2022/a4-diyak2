@@ -126,9 +126,9 @@ plot_jail_pop_by_states  <- function (states) {
 
 plot_jail_pop_by_states(c("WA", "OR", "CA"))
 
-## Section 5
+## Trends in Jail Population Over the Years; According to Race
 
-# Comparison of Jail Population by Race 
+# Comparison of JWhite Jail Population vs. Black Jail Population 
 
 # This function is intended to compare the total White population in jail to the total Black population
 #in jail in order to reveal how the totals have changes over the time frame of 1970-2018, and see
@@ -183,7 +183,8 @@ plot_jail_pop_by_race <- function() {
 
 plot_jail_pop_by_race()
 
-## Section 6
+## Total Jail Population Throughout the United States
+
 #Map of the Total Jail Population in the US by State
 # This function is intended to get the states across the US and 
 # show the total jail population from 1970-2018
